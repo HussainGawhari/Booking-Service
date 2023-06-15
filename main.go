@@ -6,4 +6,5 @@ func main() {
 	// Open a connection to the database
 
 	fmt.Println("Hello, world!")
+	fmt.Println("Hello, world!")
 }
