@@ -1,10 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"Booking_Service/api"
+	"Booking_Service/pkg/platform/database"
+	"fmt"
+	"log"
+
+	_ "github.com/lib/pq"
+)
 
 func main() {
-	// Open a connection to the database
+	// configs := config.New()
+	db, err := database.Connection()
 
-	fmt.Println("Hello, world!")
-	fmt.Println("Hello, world!")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = db.Ping()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf(" connection established")
+
+	api := api.RegisterRoutes(db)
+	//start server
+	api.Run(":8000")
+
 }
